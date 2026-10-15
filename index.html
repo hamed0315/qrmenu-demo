@@ -2,56 +2,107 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>کافه ژانت — منوی دیجیتال</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
 body {
-  font-family: Vazirmatn, -apple-system, sans-serif;
+  font-family: Vazirmatn, -apple-system, 'Segoe UI', Tahoma, sans-serif;
   background: #0A0908;
   color: #F5F1EC;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
-.container { max-width: 600px; margin: 0 auto; }
+img { display: block; max-width: 100%; }
 
 /* Header */
 .header {
   text-align: center;
-  padding: 40px 20px 25px;
+  padding: 50px 20px 30px;
+  position: relative;
+  overflow: hidden;
 }
+.header::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: 50%;
+  transform: translateX(-50%);
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(226,116,66,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.header-content { position: relative; z-index: 1; }
 .logo {
-  font-size: 36px;
+  font-size: 42px;
   font-weight: 900;
-  letter-spacing: 4px;
+  letter-spacing: 6px;
   color: #E27442;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  text-shadow: 0 0 40px rgba(226,116,66,0.3);
 }
 .tagline {
   color: #A39A8E;
   font-size: 14px;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
+  font-weight: 500;
 }
 .info {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 16px;
   font-size: 12px;
   color: #7A7268;
   flex-wrap: wrap;
 }
-.info span { display: flex; align-items: center; gap: 5px; }
+.info span { display: inline-flex; align-items: center; gap: 5px; }
 
-/* Category Chips - Sticky */
+/* Search */
+.search-wrapper {
+  padding: 0 20px 15px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #151210;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 0 16px;
+  transition: border-color 0.2s;
+}
+.search-box:focus-within { border-color: rgba(226,116,66,0.5); }
+.search-box svg {
+  width: 18px; height: 18px;
+  color: #7A7268;
+  flex-shrink: 0;
+}
+.search-box input {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  color: #F5F1EC;
+  font-size: 14px;
+  padding: 14px 12px;
+  outline: none;
+  font-family: inherit;
+}
+.search-box input::placeholder { color: #7A7268; }
+
+/* Chips */
 .chips-wrapper {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(10, 9, 8, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: rgba(10, 9, 8, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   padding: 12px 0;
-  margin-bottom: 25px;
 }
 .chips {
   display: flex;
@@ -65,60 +116,77 @@ body {
 .chips::-webkit-scrollbar { display: none; }
 .chip {
   flex-shrink: 0;
-  padding: 8px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
   background: #151210;
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 20px;
+  border-radius: 22px;
   font-size: 13px;
   color: #A39A8E;
   text-decoration: none;
   transition: all 0.2s;
   white-space: nowrap;
+  font-family: inherit;
   cursor: pointer;
 }
-.chip:hover {
-  border-color: rgba(226,116,66,0.4);
-  color: #F5F1EC;
-}
+.chip img { width: 20px; height: 20px; object-fit: contain; }
+.chip:hover { border-color: rgba(226,116,66,0.4); color: #F5F1EC; }
 .chip.active {
   background: #E27442;
   color: #FFFFFF;
   border-color: #E27442;
   font-weight: 700;
+  box-shadow: 0 4px 20px rgba(226,116,66,0.3);
 }
+.chip.active img { filter: brightness(0) invert(1); }
 
 /* Content */
-.content { padding: 0 20px 40px; }
+.content { padding: 20px; max-width: 600px; margin: 0 auto; }
 
-/* Categories */
-.category {
-  margin-bottom: 40px;
-  scroll-margin-top: 80px;
-}
+/* Category */
+.category { margin-bottom: 36px; scroll-margin-top: 80px; }
 .category-title {
   font-size: 22px;
   font-weight: 900;
   color: #F5F1EC;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   padding-bottom: 10px;
   border-bottom: 2px solid #E27442;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.category-title img {
+  width: 32px; height: 32px;
+  object-fit: contain;
 }
 
 /* Items */
 .item {
   display: flex;
-  gap: 15px;
-  padding: 15px;
+  gap: 14px;
+  padding: 14px;
   background: #151210;
   border-radius: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   border: 1px solid rgba(255,255,255,0.06);
-  transition: border-color 0.2s;
+  cursor: pointer;
+  transition: all 0.2s;
+  animation: fadeUp 0.4s ease-out backwards;
 }
-.item:hover { border-color: rgba(226,116,66,0.4); }
+.item:hover, .item:active {
+  border-color: rgba(226,116,66,0.4);
+  transform: translateY(-2px);
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .item-image {
-  width: 80px;
-  height: 80px;
+  width: 78px; height: 78px;
   border-radius: 12px;
   overflow: hidden;
   flex-shrink: 0;
@@ -126,22 +194,25 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 .item-image img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
+  transition: transform 0.3s;
 }
-.item-image.empty {
-  color: #7A7268;
-  font-size: 24px;
-}
-.item-content { flex: 1; min-width: 0; }
+.item:hover .item-image img { transform: scale(1.05); }
+.item-image.empty { color: #7A7268; font-size: 22px; }
+
+.item-content { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
 .item-name {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: #F5F1EC;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .item-price {
   font-size: 15px;
@@ -156,787 +227,1017 @@ body {
   margin-right: 3px;
 }
 
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 40px 20px;
-  margin-top: 40px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  color: #7A7268;
-  font-size: 12px;
-}
-.footer a { color: #E27442; text-decoration: none; }
+/* Hidden items on search */
+.item.hidden { display: none; }
+.category.hidden { display: none; }
 
-/* Responsive */
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.modal-overlay.open { display: flex; opacity: 1; }
+.modal {
+  background: #151210;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  max-width: 420px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  transform: scale(0.9);
+  transition: transform 0.25s;
+  display: flex;
+  flex-direction: column;
+}
+.modal-overlay.open .modal { transform: scale(1); }
+
+.modal-image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: #0A0908;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.modal-image img { width: 100%; height: 100%; object-fit: cover; }
+.modal-image.empty { color: #7A7268; font-size: 48px; }
+
+.modal-content { padding: 24px; overflow-y: auto; }
+.modal-name {
+  font-size: 22px;
+  font-weight: 900;
+  color: #F5F1EC;
+  margin-bottom: 12px;
+}
+.modal-description {
+  color: #A39A8E;
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.modal-price {
+  font-size: 22px;
+  font-weight: 900;
+  color: #E27442;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.modal-price::after {
+  content: ' تومان';
+  font-size: 13px;
+  font-weight: 400;
+  color: #7A7268;
+  margin-right: 4px;
+}
+.modal-close {
+  position: absolute;
+  top: 16px; left: 16px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  border: 0;
+  color: #F5F1EC;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* Scroll top */
+.scroll-top {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: #E27442;
+  color: white;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(226,116,66,0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+  z-index: 90;
+}
+.scroll-top.visible { opacity: 1; visibility: visible; }
+.scroll-top svg { width: 20px; height: 20px; }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #7A7268;
+  display: none;
+}
+.empty-state.show { display: block; }
+.empty-state svg { width: 60px; height: 60px; margin: 0 auto 16px; opacity: 0.4; }
+
+/* Footer */
+.cafe-footer {
+  margin-top: 40px;
+  padding: 40px 20px 30px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+}
+.footer-logo {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #E27442;
+  margin-bottom: 6px;
+}
+.footer-tagline {
+  color: #7A7268;
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+  align-items: center;
+}
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #A39A8E;
+}
+.footer-item svg {
+  width: 16px;
+  height: 16px;
+  color: #E27442;
+  flex-shrink: 0;
+}
+.footer-item a {
+  color: #A39A8E;
+  text-decoration: none;
+}
+.footer-item a:hover { color: #E27442; }
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.footer-social a {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #151210;
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #A39A8E;
+  transition: all 0.2s;
+}
+.footer-social a:hover {
+  background: #E27442;
+  border-color: #E27442;
+  color: white;
+  transform: translateY(-3px);
+}
+.footer-social svg {
+  width: 18px;
+  height: 18px;
+}
+.footer-map {
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: #151210;
+}
+.footer-map iframe {
+  width: 100%;
+  height: 200px;
+  border: 0;
+  display: block;
+  filter: grayscale(60%) invert(92%) hue-rotate(180deg) contrast(0.9);
+}
+.footer-map {
+  position: relative;
+}
+.footer-map::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60%;
+  height: 20px;
+  background: #151210;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: 0 0 16px 0;
+}
+.footer-copyright {
+  color: #7A7268;
+  font-size: 11px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
 @media (max-width: 480px) {
-  .container { padding: 0; }
-  .content { padding: 0 15px 40px; }
-  .logo { font-size: 28px; }
-  .category-title { font-size: 18px; }
+  .header { padding: 40px 15px 25px; }
+  .logo { font-size: 34px; letter-spacing: 4px; }
+  .content { padding: 16px; }
+  .category-title { font-size: 19px; }
   .item { padding: 12px; gap: 12px; }
-  .item-image { width: 65px; height: 65px; }
+  .item-image { width: 68px; height: 68px; }
   .item-name { font-size: 14px; }
-  .item-price { font-size: 13px; }
+  .item-price { font-size: 14px; }
+  .modal-content { padding: 20px; }
+  .modal-name { font-size: 19px; }
 }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="logo">ZHANET</div>
-  <div class="tagline">قهوه‌ای که عاشقش می‌شی</div>
-  <div class="info">
-    <span>📍 استان البرز، کرج، منطقه ۳، باران ۶</span>
-    <span>📞 021-11111111</span>
+  <div class="header-content">
+    <div class="logo">ZHANET</div>
+    <div class="tagline">قهوه‌ای که عاشقش می‌شی</div>
+    <div class="info">
+    </div>
+  </div>
+</div>
+
+<div class="search-wrapper">
+  <div class="search-box">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+    <input type="text" id="searchInput" placeholder="جستجوی غذا یا نوشیدنی..." autocomplete="off">
   </div>
 </div>
 
 <div class="chips-wrapper">
   <div class="chips" id="chips">
-    <a class="chip" data-target="cat-0" href="#cat-0">قهوه</a>
-    <a class="chip" data-target="cat-1" href="#cat-1">چای و دمنوش</a>
-    <a class="chip" data-target="cat-2" href="#cat-2">نوشیدنی سرد</a>
-    <a class="chip" data-target="cat-3" href="#cat-3">شیک</a>
-    <a class="chip" data-target="cat-4" href="#cat-4">کیک و دسر</a>
-    <a class="chip" data-target="cat-5" href="#cat-5">میان وعده</a>
-    <a class="chip" data-target="cat-6" href="#cat-6">سالاد</a>
-    <a class="chip" data-target="cat-7" href="#cat-7">بشقاب مزه</a>
-    <a class="chip" data-target="cat-8" href="#cat-8">بشقاب رژیمی</a>
-    <a class="chip" data-target="cat-9" href="#cat-9">ساندویچ</a>
-    <a class="chip" data-target="cat-10" href="#cat-10">مینی ساندویچ</a>
-    <a class="chip" data-target="cat-11" href="#cat-11">همبرگر</a>
-    <a class="chip" data-target="cat-12" href="#cat-12">مینی برگر</a>
-    <a class="chip" data-target="cat-13" href="#cat-13">پیتزا</a>
-    <a class="chip" data-target="cat-14" href="#cat-14">مینی پیتزا</a>
-    <a class="chip" data-target="cat-15" href="#cat-15">پاستا</a>
+    <a class="chip" data-target="cat-0" href="#cat-0"><img src="./icons/categories/01-drinks-hot/coffee.png" alt="" loading="lazy"><span>قهوه</span></a>
+    <a class="chip" data-target="cat-1" href="#cat-1"><img src="./icons/categories/01-drinks-hot/tea-set.png" alt="" loading="lazy"><span>چای و دمنوش</span></a>
+    <a class="chip" data-target="cat-2" href="#cat-2"><img src="./icons/categories/02-drinks-cold/mojito.png" alt="" loading="lazy"><span>نوشیدنی سرد</span></a>
+    <a class="chip" data-target="cat-3" href="#cat-3"><img src="./icons/categories/02-drinks-cold/shake.png" alt="" loading="lazy"><span>شیک</span></a>
+    <a class="chip" data-target="cat-4" href="#cat-4"><img src="./icons/categories/09-dessert/cake.png" alt="" loading="lazy"><span>کیک و دسر</span></a>
+    <a class="chip" data-target="cat-5" href="#cat-5"><img src="./icons/categories/10-snack/popcorn.png" alt="" loading="lazy"><span>میان وعده</span></a>
+    <a class="chip" data-target="cat-6" href="#cat-6"><img src="./icons/categories/08-salad/salad.png" alt="" loading="lazy"><span>سالاد</span></a>
+    <a class="chip" data-target="cat-7" href="#cat-7"><img src="./icons/categories/04-appetizer/mozzarella.png" alt="" loading="lazy"><span>بشقاب مزه</span></a>
+    <a class="chip" data-target="cat-8" href="#cat-8"><img src="./icons/categories/08-salad/veg-salad.png" alt="" loading="lazy"><span>بشقاب رژیمی</span></a>
+    <a class="chip" data-target="cat-9" href="#cat-9"><img src="./icons/categories/06-fast-food/sandwich.png" alt="" loading="lazy"><span>ساندویچ</span></a>
+    <a class="chip" data-target="cat-10" href="#cat-10"><img src="./icons/categories/06-fast-food/hotdog.png" alt="" loading="lazy"><span>مینی ساندویچ</span></a>
+    <a class="chip" data-target="cat-11" href="#cat-11"><img src="./icons/categories/06-fast-food/burger.png" alt="" loading="lazy"><span>همبرگر</span></a>
+    <a class="chip" data-target="cat-12" href="#cat-12"><img src="./icons/categories/06-fast-food/burger-2.png" alt="" loading="lazy"><span>مینی برگر</span></a>
+    <a class="chip" data-target="cat-13" href="#cat-13"><img src="./icons/categories/06-fast-food/pizza.png" alt="" loading="lazy"><span>پیتزا</span></a>
+    <a class="chip" data-target="cat-14" href="#cat-14"><img src="./icons/categories/06-fast-food/pizza-slice-1.png" alt="" loading="lazy"><span>مینی پیتزا</span></a>
+    <a class="chip" data-target="cat-15" href="#cat-15"><img src="./icons/categories/05-main/pasta.png" alt="" loading="lazy"><span>پاستا</span></a>
   </div>
 </div>
 
 <div class="content">
-<div class="category" id="cat-0"><h2 class="category-title">قهوه</h2>
-<div class="item">
+<div class="category" id="cat-0"><h2 class="category-title"><img src="./icons/categories/01-drinks-hot/coffee.png" alt="" loading="lazy"><span>قهوه</span></h2>
+<div class="item" data-name="اسپرسو تک" data-price="10,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337887414214248-5cfd50.jpg" style="animation-delay: 0.0s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337887414214248-5cfd50.jpg" alt="اسپرسو تک" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">اسپرسو تک</div>
     <div class="item-price">10,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="اسپرسو دبل" data-price="14,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337887414214248-5cfd50.jpg" style="animation-delay: 0.03s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337887414214248-5cfd50.jpg" alt="اسپرسو دبل" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">اسپرسو دبل</div>
     <div class="item-price">14,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="اسپرسو عربیکا تک" data-price="12,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337887414214248-5cfd50.jpg" style="animation-delay: 0.06s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337887414214248-5cfd50.jpg" alt="اسپرسو عربیکا تک" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">اسپرسو عربیکا تک</div>
     <div class="item-price">12,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="اسپرسو عربیکا دبل" data-price="16,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337887414214248-5cfd50.jpg" style="animation-delay: 0.09s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337887414214248-5cfd50.jpg" alt="اسپرسو عربیکا دبل" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">اسپرسو عربیکا دبل</div>
     <div class="item-price">16,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="آمریکانو" data-price="16,000" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337886499769681-dbe848.jpg" style="animation-delay: 0.12s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337886499769681-dbe848.jpg" alt="آمریکانو" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">آمریکانو</div>
     <div class="item-price">16,000</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="آمریکانو عربیکا" data-price="18,000" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337886499769681-dbe848.jpg" style="animation-delay: 0.15s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337886499769681-dbe848.jpg" alt="آمریکانو عربیکا" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">آمریکانو عربیکا</div>
     <div class="item-price">18,000</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="قهوه ترک" data-price="17,000" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337889669083454-0f17c6.jpg" style="animation-delay: 0.18s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337889669083454-0f17c6.jpg" alt="قهوه ترک" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">قهوه ترک</div>
     <div class="item-price">17,000</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="کاپوچینو" data-price="24,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337886812467126-070f72.jpg" style="animation-delay: 0.21s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337886812467126-070f72.jpg" alt="کاپوچینو" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">کاپوچینو</div>
     <div class="item-price">24,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="لاته" data-price="25,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337888719925524-95379d.jpg" style="animation-delay: 0.24s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337888719925524-95379d.jpg" alt="لاته" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">لاته</div>
     <div class="item-price">25,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="وانیلا لاته" data-price="26,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337889798011130-9a9bb1.jpg" style="animation-delay: 0.27s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337889798011130-9a9bb1.jpg" alt="وانیلا لاته" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">وانیلا لاته</div>
     <div class="item-price">26,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="لاته دارچین/عسل" data-price="25,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337889798011130-9a9bb1.jpg" style="animation-delay: 0.3s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337889798011130-9a9bb1.jpg" alt="لاته دارچین/عسل" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">لاته دارچین/عسل</div>
     <div class="item-price">25,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="ماچا لاته" data-price="26,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337889184093602-dc6148.jpg" style="animation-delay: 0.32999999999999996s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337889184093602-dc6148.jpg" alt="ماچا لاته" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">ماچا لاته</div>
     <div class="item-price">26,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="موکا" data-price="27,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337889300425922-87d237.jpg" style="animation-delay: 0.36s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337889300425922-87d237.jpg" alt="موکا" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">موکا</div>
     <div class="item-price">27,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="وایت موکا" data-price="28,900" style="animation-delay: 0.39s">
   <div class="item-image empty"><span>🍽️</span></div>
   <div class="item-content">
     <div class="item-name">وایت موکا</div>
     <div class="item-price">28,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="کارامل ماکیاتو" data-price="26,900" style="animation-delay: 0.42s">
   <div class="item-image empty"><span>🍽️</span></div>
   <div class="item-content">
     <div class="item-name">کارامل ماکیاتو</div>
     <div class="item-price">26,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="کوکو لاته" data-price="26,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337888719925524-95379d.jpg" style="animation-delay: 0.44999999999999996s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337888719925524-95379d.jpg" alt="کوکو لاته" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">کوکو لاته</div>
     <div class="item-price">26,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="هات چاکلت" data-price="26,900" style="animation-delay: 0.48s">
   <div class="item-image empty"><span>🍽️</span></div>
   <div class="item-content">
     <div class="item-name">هات چاکلت</div>
     <div class="item-price">26,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="وایت چاکلت" data-price="26,900" style="animation-delay: 0.5s">
   <div class="item-image empty"><span>🍽️</span></div>
   <div class="item-content">
     <div class="item-name">وایت چاکلت</div>
     <div class="item-price">26,900</div>
   </div>
 </div></div>
-<div class="category" id="cat-1"><h2 class="category-title">چای و دمنوش</h2>
-<div class="item">
+<div class="category" id="cat-1"><h2 class="category-title"><img src="./icons/categories/01-drinks-hot/tea-set.png" alt="" loading="lazy"><span>چای و دمنوش</span></h2>
+<div class="item" data-name="چای سیاه تک‌نفره" data-price="12,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890209020400-4ba3b9.jpg" style="animation-delay: 0.0s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890209020400-4ba3b9.jpg" alt="چای سیاه تک‌نفره" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">چای سیاه تک‌نفره</div>
     <div class="item-price">12,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="چای سیاه دو‌نفره" data-price="15,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890209020400-4ba3b9.jpg" style="animation-delay: 0.03s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890209020400-4ba3b9.jpg" alt="چای سیاه دو‌نفره" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">چای سیاه دو‌نفره</div>
     <div class="item-price">15,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="چای سبز تک‌نفره" data-price="12,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890326404796-7206a9.jpg" style="animation-delay: 0.06s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890326404796-7206a9.jpg" alt="چای سبز تک‌نفره" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">چای سبز تک‌نفره</div>
     <div class="item-price">12,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="چای سبز دو‌نفره" data-price="15,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890326404796-7206a9.jpg" style="animation-delay: 0.09s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890326404796-7206a9.jpg" alt="چای سبز دو‌نفره" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">چای سبز دو‌نفره</div>
     <div class="item-price">15,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="چای ترش تک‌نفره" data-price="12,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890526958188-9739e8.jpg" style="animation-delay: 0.12s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890526958188-9739e8.jpg" alt="چای ترش تک‌نفره" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">چای ترش تک‌نفره</div>
     <div class="item-price">12,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="چای ترش دو‌نفره" data-price="15,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890526958188-9739e8.jpg" style="animation-delay: 0.15s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890526958188-9739e8.jpg" alt="چای ترش دو‌نفره" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">چای ترش دو‌نفره</div>
     <div class="item-price">15,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="چای انگلیسی" data-price="17,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890209020400-4ba3b9.jpg" style="animation-delay: 0.18s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890209020400-4ba3b9.jpg" alt="چای انگلیسی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">چای انگلیسی</div>
     <div class="item-price">17,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="چای کرک" data-price="17,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337888366547798-05459c.jpg" style="animation-delay: 0.21s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337888366547798-05459c.jpg" alt="چای کرک" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">چای کرک</div>
     <div class="item-price">17,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="چای ماسالا" data-price="22,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337888884482932-a8468a.jpg" style="animation-delay: 0.24s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337888884482932-a8468a.jpg" alt="چای ماسالا" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">چای ماسالا</div>
     <div class="item-price">22,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="دمنوش" data-price="16,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890526958188-9739e8.jpg" style="animation-delay: 0.27s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337890526958188-9739e8.jpg" alt="دمنوش" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">دمنوش</div>
     <div class="item-price">16,900</div>
   </div>
 </div></div>
-<div class="category" id="cat-2"><h2 class="category-title">نوشیدنی سرد</h2>
-<div class="item">
+<div class="category" id="cat-2"><h2 class="category-title"><img src="./icons/categories/02-drinks-cold/mojito.png" alt="" loading="lazy"><span>نوشیدنی سرد</span></h2>
+<div class="item" data-name="آیس آمریکانو" data-price="18,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891844913310-279fc1.jpg" style="animation-delay: 0.0s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891844913310-279fc1.jpg" alt="آیس آمریکانو" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">آیس آمریکانو</div>
     <div class="item-price">18,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="آیس لاته" data-price="27,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337892415914183-891c52.jpg" style="animation-delay: 0.03s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337892415914183-891c52.jpg" alt="آیس لاته" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">آیس لاته</div>
     <div class="item-price">27,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="آیس وانیلا لاته" data-price="28,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337892920693294-2531c3.jpg" style="animation-delay: 0.06s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337892920693294-2531c3.jpg" alt="آیس وانیلا لاته" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">آیس وانیلا لاته</div>
     <div class="item-price">28,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="آیس موکا" data-price="28,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337892755267257-2cfdf5.jpg" style="animation-delay: 0.09s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337892755267257-2cfdf5.jpg" alt="آیس موکا" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">آیس موکا</div>
     <div class="item-price">28,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="آیس ماچا لاته" data-price="27,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337892506258668-0ad488.jpg" style="animation-delay: 0.12s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337892506258668-0ad488.jpg" alt="آیس ماچا لاته" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">آیس ماچا لاته</div>
     <div class="item-price">27,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="آیس کارامل ماکیاتو" data-price="27,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891928394163-bbac61.jpg" style="animation-delay: 0.15s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891928394163-bbac61.jpg" alt="آیس کارامل ماکیاتو" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">آیس کارامل ماکیاتو</div>
     <div class="item-price">27,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="آفوگاتو" data-price="29,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891191140506-6b1352.jpg" style="animation-delay: 0.18s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891191140506-6b1352.jpg" alt="آفوگاتو" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">آفوگاتو</div>
     <div class="item-price">29,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="سودا لمون کافی" data-price="19,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337893019481530-f077f1.jpg" style="animation-delay: 0.21s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337893019481530-f077f1.jpg" alt="سودا لمون کافی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">سودا لمون کافی</div>
     <div class="item-price">19,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="اورنج جوس کافی" data-price="23,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337893758613481-c09bd2.jpg" style="animation-delay: 0.24s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337893758613481-c09bd2.jpg" alt="اورنج جوس کافی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">اورنج جوس کافی</div>
     <div class="item-price">23,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="فراپه وانیل" data-price="29,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891484974838-c10c8a.jpg" style="animation-delay: 0.27s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891484974838-c10c8a.jpg" alt="فراپه وانیل" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">فراپه وانیل</div>
     <div class="item-price">29,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="فراپه شکلات" data-price="29,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891308510188-1dc142.jpg" style="animation-delay: 0.3s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891308510188-1dc142.jpg" alt="فراپه شکلات" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">فراپه شکلات</div>
     <div class="item-price">29,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="فراپه توت فرنگی" data-price="29,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891428588389-e7c5c4.jpg" style="animation-delay: 0.32999999999999996s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891428588389-e7c5c4.jpg" alt="فراپه توت فرنگی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">فراپه توت فرنگی</div>
     <div class="item-price">29,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="فراپه کارامل" data-price="29,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891484974838-c10c8a.jpg" style="animation-delay: 0.36s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891484974838-c10c8a.jpg" alt="فراپه کارامل" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">فراپه کارامل</div>
     <div class="item-price">29,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="فراپه نارگیل" data-price="29,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891484974838-c10c8a.jpg" style="animation-delay: 0.39s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891484974838-c10c8a.jpg" alt="فراپه نارگیل" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">فراپه نارگیل</div>
     <div class="item-price">29,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="لیموناد بلند" data-price="23,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337893019481530-f077f1.jpg" style="animation-delay: 0.42s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337893019481530-f077f1.jpg" alt="لیموناد بلند" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">لیموناد بلند</div>
     <div class="item-price">23,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="لیموناد کوبایی" data-price="26,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337893019481530-f077f1.jpg" style="animation-delay: 0.44999999999999996s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337893019481530-f077f1.jpg" alt="لیموناد کوبایی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">لیموناد کوبایی</div>
     <div class="item-price">26,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="موهیتو بلند" data-price="24,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337893346278985-77ff99.jpg" style="animation-delay: 0.48s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337893346278985-77ff99.jpg" alt="موهیتو بلند" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">موهیتو بلند</div>
     <div class="item-price">24,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="موهیتو کوبایی" data-price="27,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337893346278985-77ff99.jpg" style="animation-delay: 0.5s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337893346278985-77ff99.jpg" alt="موهیتو کوبایی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">موهیتو کوبایی</div>
     <div class="item-price">27,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="آبمیوه طبیعی فصل" data-price="24,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891637220517-c95dbb.jpg" style="animation-delay: 0.5s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891637220517-c95dbb.jpg" alt="آبمیوه طبیعی فصل" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">آبمیوه طبیعی فصل</div>
     <div class="item-price">24,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="وانیلا اسپارک" data-price="26,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891484974838-c10c8a.jpg" style="animation-delay: 0.5s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891484974838-c10c8a.jpg" alt="وانیلا اسپارک" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">وانیلا اسپارک</div>
     <div class="item-price">26,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="پینک سامر" data-price="28,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891428588389-e7c5c4.jpg" style="animation-delay: 0.5s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891428588389-e7c5c4.jpg" alt="پینک سامر" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">پینک سامر</div>
     <div class="item-price">28,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="مون بری" data-price="28,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891428588389-e7c5c4.jpg" style="animation-delay: 0.5s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337891428588389-e7c5c4.jpg" alt="مون بری" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">مون بری</div>
     <div class="item-price">28,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="رد اوشن" data-price="28,900" style="animation-delay: 0.5s">
   <div class="item-image empty"><span>🍽️</span></div>
   <div class="item-content">
     <div class="item-name">رد اوشن</div>
     <div class="item-price">28,900</div>
   </div>
 </div></div>
-<div class="category" id="cat-3"><h2 class="category-title">شیک</h2>
-<div class="item">
+<div class="category" id="cat-3"><h2 class="category-title"><img src="./icons/categories/02-drinks-cold/shake.png" alt="" loading="lazy"><span>شیک</span></h2>
+<div class="item" data-name="شیک وانیل" data-price="27,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894004180606-437c0d.jpg" style="animation-delay: 0.0s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894004180606-437c0d.jpg" alt="شیک وانیل" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">شیک وانیل</div>
     <div class="item-price">27,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="شیک توت فرنگی" data-price="28,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337895086768783-7a3c75.jpg" style="animation-delay: 0.03s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337895086768783-7a3c75.jpg" alt="شیک توت فرنگی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">شیک توت فرنگی</div>
     <div class="item-price">28,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="شیک نوتلا" data-price="33,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894508240292-49e1cd.jpg" style="animation-delay: 0.06s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894508240292-49e1cd.jpg" alt="شیک نوتلا" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">شیک نوتلا</div>
     <div class="item-price">33,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="شیک لوتوس" data-price="34,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894393673414-ef7f70.jpg" style="animation-delay: 0.09s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894393673414-ef7f70.jpg" alt="شیک لوتوس" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">شیک لوتوس</div>
     <div class="item-price">34,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="شیک موز نوتلا" data-price="33,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894508240292-49e1cd.jpg" style="animation-delay: 0.12s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894508240292-49e1cd.jpg" alt="شیک موز نوتلا" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">شیک موز نوتلا</div>
     <div class="item-price">33,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="شیک کارامل نمکی" data-price="29,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894004180606-437c0d.jpg" style="animation-delay: 0.15s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894004180606-437c0d.jpg" alt="شیک کارامل نمکی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">شیک کارامل نمکی</div>
     <div class="item-price">29,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="شیک بادام زمینی" data-price="31,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894601329043-b9a886.jpg" style="animation-delay: 0.18s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894601329043-b9a886.jpg" alt="شیک بادام زمینی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">شیک بادام زمینی</div>
     <div class="item-price">31,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="شیک پسته" data-price="33,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894692021881-c1860d.jpg" style="animation-delay: 0.21s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894692021881-c1860d.jpg" alt="شیک پسته" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">شیک پسته</div>
     <div class="item-price">33,500</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="شیک شیر عسل" data-price="28,500" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894004180606-437c0d.jpg" style="animation-delay: 0.24s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337894004180606-437c0d.jpg" alt="شیک شیر عسل" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">شیک شیر عسل</div>
     <div class="item-price">28,500</div>
   </div>
 </div></div>
-<div class="category" id="cat-4"><h2 class="category-title">کیک و دسر</h2>
-<div class="item">
+<div class="category" id="cat-4"><h2 class="category-title"><img src="./icons/categories/09-dessert/cake.png" alt="" loading="lazy"><span>کیک و دسر</span></h2>
+<div class="item" data-name="کیک" data-price="20,000" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337895421867488-dc6f05.jpg" style="animation-delay: 0.0s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337895421867488-dc6f05.jpg" alt="کیک" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">کیک</div>
     <div class="item-price">20,000</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="کیک ویژه" data-price="23,000" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337895421867488-dc6f05.jpg" style="animation-delay: 0.03s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337895421867488-dc6f05.jpg" alt="کیک ویژه" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">کیک ویژه</div>
     <div class="item-price">23,000</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="کروسان" data-price="22,000" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337895819504494-e4c640.jpg" style="animation-delay: 0.06s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337895819504494-e4c640.jpg" alt="کروسان" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">کروسان</div>
     <div class="item-price">22,000</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="کوکی رژیمی" data-price="14,000" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337895339470214-39ea76.jpg" style="animation-delay: 0.09s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337895339470214-39ea76.jpg" alt="کوکی رژیمی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">کوکی رژیمی</div>
     <div class="item-price">14,000</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="کرم کارامل" data-price="27,000" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337895703223938-3cf161.jpg" style="animation-delay: 0.12s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337895703223938-3cf161.jpg" alt="کرم کارامل" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">کرم کارامل</div>
     <div class="item-price">27,000</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="کرم بروله" data-price="29,000" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337895703223938-3cf161.jpg" style="animation-delay: 0.15s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337895703223938-3cf161.jpg" alt="کرم بروله" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">کرم بروله</div>
     <div class="item-price">29,000</div>
   </div>
 </div></div>
-<div class="category" id="cat-5"><h2 class="category-title">میان وعده</h2>
-<div class="item">
+<div class="category" id="cat-5"><h2 class="category-title"><img src="./icons/categories/10-snack/popcorn.png" alt="" loading="lazy"><span>میان وعده</span></h2>
+<div class="item" data-name="سیب زمینی" data-price="9,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337897096243728-62bed1.jpg" style="animation-delay: 0.0s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337897096243728-62bed1.jpg" alt="سیب زمینی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">سیب زمینی</div>
     <div class="item-price">9,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="سیب زمینی با پنیر" data-price="12,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337897096243728-62bed1.jpg" style="animation-delay: 0.03s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337897096243728-62bed1.jpg" alt="سیب زمینی با پنیر" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">سیب زمینی با پنیر</div>
     <div class="item-price">12,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="سیب ویژه ژانت" data-price="15,900" style="animation-delay: 0.06s">
   <div class="item-image empty"><span>🍽️</span></div>
   <div class="item-content">
     <div class="item-name">سیب ویژه ژانت</div>
     <div class="item-price">15,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="تست ژامبون" data-price="12,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898187676611-8acdb2.jpg" style="animation-delay: 0.09s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898187676611-8acdb2.jpg" alt="تست ژامبون" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">تست ژامبون</div>
     <div class="item-price">12,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="تست گودا" data-price="14,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898187676611-8acdb2.jpg" style="animation-delay: 0.12s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898187676611-8acdb2.jpg" alt="تست گودا" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">تست گودا</div>
     <div class="item-price">14,900</div>
   </div>
 </div></div>
-<div class="category" id="cat-6"><h2 class="category-title">سالاد</h2>
-<div class="item">
+<div class="category" id="cat-6"><h2 class="category-title"><img src="./icons/categories/08-salad/salad.png" alt="" loading="lazy"><span>سالاد</span></h2>
+<div class="item" data-name="سالاد سزار" data-price="19,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" style="animation-delay: 0.0s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" alt="سالاد سزار" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">سالاد سزار</div>
     <div class="item-price">19,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="سالاد سبز" data-price="13,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" style="animation-delay: 0.03s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" alt="سالاد سبز" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">سالاد سبز</div>
     <div class="item-price">13,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="سالاد انارکلم" data-price="16,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" style="animation-delay: 0.06s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" alt="سالاد انارکلم" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">سالاد انارکلم</div>
     <div class="item-price">16,900</div>
   </div>
 </div></div>
-<div class="category" id="cat-7"><h2 class="category-title">بشقاب مزه</h2>
-<div class="item">
+<div class="category" id="cat-7"><h2 class="category-title"><img src="./icons/categories/04-appetizer/mozzarella.png" alt="" loading="lazy"><span>بشقاب مزه</span></h2>
+<div class="item" data-name="بشقاب ویژه ژانت" data-price="32,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" style="animation-delay: 0.0s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" alt="بشقاب ویژه ژانت" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">بشقاب ویژه ژانت</div>
     <div class="item-price">32,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="بشقاب یک نفره" data-price="28,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" style="animation-delay: 0.03s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" alt="بشقاب یک نفره" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">بشقاب یک نفره</div>
     <div class="item-price">28,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="بشقاب اکو" data-price="22,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" style="animation-delay: 0.06s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" alt="بشقاب اکو" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">بشقاب اکو</div>
     <div class="item-price">22,900</div>
   </div>
 </div></div>
-<div class="category" id="cat-8"><h2 class="category-title">بشقاب رژیمی</h2>
-<div class="item">
+<div class="category" id="cat-8"><h2 class="category-title"><img src="./icons/categories/08-salad/veg-salad.png" alt="" loading="lazy"><span>بشقاب رژیمی</span></h2>
+<div class="item" data-name="بشقاب یک نفره رژیمی" data-price="22,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" style="animation-delay: 0.0s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" alt="بشقاب یک نفره رژیمی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">بشقاب یک نفره رژیمی</div>
     <div class="item-price">22,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="بشقاب اکو رژیمی" data-price="18,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" style="animation-delay: 0.03s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898070499559-1c2ef2.jpg" alt="بشقاب اکو رژیمی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">بشقاب اکو رژیمی</div>
     <div class="item-price">18,900</div>
   </div>
 </div></div>
-<div class="category" id="cat-9"><h2 class="category-title">ساندویچ</h2>
-<div class="item">
+<div class="category" id="cat-9"><h2 class="category-title"><img src="./icons/categories/06-fast-food/sandwich.png" alt="" loading="lazy"><span>ساندویچ</span></h2>
+<div class="item" data-name="هات داگ ویژه" data-price="15,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337897190181369-e3b47b.jpg" style="animation-delay: 0.0s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337897190181369-e3b47b.jpg" alt="هات داگ ویژه" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">هات داگ ویژه</div>
     <div class="item-price">15,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="چیکن مایونز ژانت" data-price="18,900" style="animation-delay: 0.03s">
   <div class="item-image empty"><span>🍽️</span></div>
   <div class="item-content">
     <div class="item-name">چیکن مایونز ژانت</div>
     <div class="item-price">18,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="ژامبون مایونز" data-price="14,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898187676611-8acdb2.jpg" style="animation-delay: 0.06s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898187676611-8acdb2.jpg" alt="ژامبون مایونز" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">ژامبون مایونز</div>
     <div class="item-price">14,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="ژامبون تنوری" data-price="16,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898187676611-8acdb2.jpg" style="animation-delay: 0.09s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898187676611-8acdb2.jpg" alt="ژامبون تنوری" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">ژامبون تنوری</div>
     <div class="item-price">16,900</div>
   </div>
 </div></div>
-<div class="category" id="cat-10"><h2 class="category-title">مینی ساندویچ</h2>
-<div class="item">
+<div class="category" id="cat-10"><h2 class="category-title"><img src="./icons/categories/06-fast-food/hotdog.png" alt="" loading="lazy"><span>مینی ساندویچ</span></h2>
+<div class="item" data-name="هات داگ" data-price="12,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337897190181369-e3b47b.jpg" style="animation-delay: 0.0s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337897190181369-e3b47b.jpg" alt="هات داگ" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">هات داگ</div>
     <div class="item-price">12,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="چیکن مایونز" data-price="11,900" style="animation-delay: 0.03s">
   <div class="item-image empty"><span>🍽️</span></div>
   <div class="item-content">
     <div class="item-name">چیکن مایونز</div>
     <div class="item-price">11,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="ژامبون مایونز" data-price="10,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898187676611-8acdb2.jpg" style="animation-delay: 0.06s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898187676611-8acdb2.jpg" alt="ژامبون مایونز" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">ژامبون مایونز</div>
     <div class="item-price">10,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="ژامبون تنوری" data-price="13,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898187676611-8acdb2.jpg" style="animation-delay: 0.09s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337898187676611-8acdb2.jpg" alt="ژامبون تنوری" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">ژامبون تنوری</div>
     <div class="item-price">13,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="ماشروم برگر مینی" data-price="12,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337896933212544-f52466.jpg" style="animation-delay: 0.12s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337896933212544-f52466.jpg" alt="ماشروم برگر مینی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">ماشروم برگر مینی</div>
     <div class="item-price">12,900</div>
   </div>
 </div></div>
-<div class="category" id="cat-11"><h2 class="category-title">همبرگر</h2>
-<div class="item">
+<div class="category" id="cat-11"><h2 class="category-title"><img src="./icons/categories/06-fast-food/burger.png" alt="" loading="lazy"><span>همبرگر</span></h2>
+<div class="item" data-name="همبرگر ویژه ژانت" data-price="22,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337896933212544-f52466.jpg" style="animation-delay: 0.0s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337896933212544-f52466.jpg" alt="همبرگر ویژه ژانت" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">همبرگر ویژه ژانت</div>
     <div class="item-price">22,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="چیزبرگر" data-price="18,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337896933212544-f52466.jpg" style="animation-delay: 0.03s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337896933212544-f52466.jpg" alt="چیزبرگر" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">چیزبرگر</div>
     <div class="item-price">18,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="ماشروم برگر" data-price="21,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337896933212544-f52466.jpg" style="animation-delay: 0.06s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337896933212544-f52466.jpg" alt="ماشروم برگر" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">ماشروم برگر</div>
     <div class="item-price">21,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="وگن برگر" data-price="23,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337896933212544-f52466.jpg" style="animation-delay: 0.09s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337896933212544-f52466.jpg" alt="وگن برگر" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">وگن برگر</div>
     <div class="item-price">23,900</div>
   </div>
 </div></div>
-<div class="category" id="cat-12"><h2 class="category-title">مینی برگر</h2>
-<div class="item">
+<div class="category" id="cat-12"><h2 class="category-title"><img src="./icons/categories/06-fast-food/burger-2.png" alt="" loading="lazy"><span>مینی برگر</span></h2>
+<div class="item" data-name="چیزبرگر مینی" data-price="13,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337896933212544-f52466.jpg" style="animation-delay: 0.0s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337896933212544-f52466.jpg" alt="چیزبرگر مینی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">چیزبرگر مینی</div>
     <div class="item-price">13,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="ماشروم برگر مینی" data-price="14,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337896933212544-f52466.jpg" style="animation-delay: 0.03s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337896933212544-f52466.jpg" alt="ماشروم برگر مینی" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">ماشروم برگر مینی</div>
     <div class="item-price">14,900</div>
   </div>
 </div></div>
-<div class="category" id="cat-13"><h2 class="category-title">پیتزا</h2>
-<div class="item">
+<div class="category" id="cat-13"><h2 class="category-title"><img src="./icons/categories/06-fast-food/pizza.png" alt="" loading="lazy"><span>پیتزا</span></h2>
+<div class="item" data-name="پپرونی" data-price="19,900" style="animation-delay: 0.0s">
   <div class="item-image empty"><span>🍽️</span></div>
   <div class="item-content">
     <div class="item-name">پپرونی</div>
     <div class="item-price">19,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="مخلوط" data-price="21,900" style="animation-delay: 0.03s">
   <div class="item-image empty"><span>🍽️</span></div>
   <div class="item-content">
     <div class="item-name">مخلوط</div>
     <div class="item-price">21,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="گوشت و قارچ" data-price="22,900" style="animation-delay: 0.06s">
   <div class="item-image empty"><span>🍽️</span></div>
   <div class="item-content">
     <div class="item-name">گوشت و قارچ</div>
     <div class="item-price">22,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="مرغ و قارچ" data-price="22,900" style="animation-delay: 0.09s">
   <div class="item-image empty"><span>🍽️</span></div>
   <div class="item-content">
     <div class="item-name">مرغ و قارچ</div>
     <div class="item-price">22,900</div>
   </div>
 </div></div>
-<div class="category" id="cat-14"><h2 class="category-title">مینی پیتزا</h2>
-<div class="item">
+<div class="category" id="cat-14"><h2 class="category-title"><img src="./icons/categories/06-fast-food/pizza-slice-1.png" alt="" loading="lazy"><span>مینی پیتزا</span></h2>
+<div class="item" data-name="گوشت و قارچ مینی" data-price="16,900" style="animation-delay: 0.0s">
   <div class="item-image empty"><span>🍽️</span></div>
   <div class="item-content">
     <div class="item-name">گوشت و قارچ مینی</div>
     <div class="item-price">16,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="مخلوط مینی" data-price="15,900" style="animation-delay: 0.03s">
   <div class="item-image empty"><span>🍽️</span></div>
   <div class="item-content">
     <div class="item-name">مخلوط مینی</div>
     <div class="item-price">15,900</div>
   </div>
 </div></div>
-<div class="category" id="cat-15"><h2 class="category-title">پاستا</h2>
-<div class="item">
+<div class="category" id="cat-15"><h2 class="category-title"><img src="./icons/categories/05-main/pasta.png" alt="" loading="lazy"><span>پاستا</span></h2>
+<div class="item" data-name="فتوچینی آلفردو" data-price="22,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337897704207419-605ba5.jpg" style="animation-delay: 0.0s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337897704207419-605ba5.jpg" alt="فتوچینی آلفردو" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">فتوچینی آلفردو</div>
     <div class="item-price">22,900</div>
   </div>
 </div>
-<div class="item">
+<div class="item" data-name="پنه آلفردو" data-price="21,900" data-image="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337897704207419-605ba5.jpg" style="animation-delay: 0.03s">
   <div class="item-image"><img src="https://qrmenu-media.s3.ir-thr-at1.arvanstorage.ir/users/91eb5a39-b887-4ac1-9fe6-1373226e17eb/items/1791337897704207419-605ba5.jpg" alt="پنه آلفردو" loading="lazy"></div>
   <div class="item-content">
     <div class="item-name">پنه آلفردو</div>
@@ -946,12 +1247,65 @@ body {
 
 </div>
 
-<div class="footer">
-  ساخته‌شده با <a href="https://qr-menus.ir">QRMenu</a>
+<div class="empty-state" id="emptyState">
+  <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+  <p>چیزی پیدا نشد</p>
 </div>
 
+<!-- Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal" style="position: relative;">
+    <button class="modal-close" id="modalClose">×</button>
+    <div class="modal-image" id="modalImage"></div>
+    <div class="modal-content">
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-price" id="modalPrice"></div>
+    </div>
+  </div>
+</div>
+
+<button class="scroll-top" id="scrollTop" aria-label="بالا">
+  <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"></path></svg>
+</button>
+
+<footer class="cafe-footer">
+  <div class="footer-logo">ZHANET</div>
+  <div class="footer-tagline">قهوه‌ای که عاشقش می‌شی</div>
+  <div class="footer-info">
+    <div class="footer-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+      <span>استان البرز، کرج، منطقه ۳، باران ۶</span>
+    </div>
+    <div class="footer-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+      <a href="tel:02111111111" dir="ltr">021-11111111</a>
+    </div>
+  </div>
+  <div class="footer-social">
+    <a href="https://instagram.com/CAFE_INSTAGRAM" target="_blank" rel="noopener" aria-label="اینستاگرام">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+    </a>
+    <a href="https://wa.me/98WHATSAPP" target="_blank" rel="noopener" aria-label="واتساپ">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+    </a>
+    <a href="tel:02111111111" aria-label="تماس">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+    </a>
+  </div>
+  <div class="footer-map">
+    <iframe
+      src="https://maps.google.com/maps?q=35.7931802,50.8692420&amp;z=15&amp;output=embed"
+      loading="lazy"
+      title="موقعیت کافه روی نقشه">
+    </iframe>
+  </div>
+  <div class="footer-copyright">
+    © ۱۴۰۵ کافه ژانت — تمام حقوق محفوظ است
+  </div>
+</footer>
+
 <script>
-// Active chip on scroll
+// ===== Chips active on scroll =====
 const chips = document.querySelectorAll('.chip');
 const categories = document.querySelectorAll('.category');
 
@@ -959,19 +1313,84 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       const id = entry.target.id;
-      chips.forEach(chip => {
-        chip.classList.toggle('active', chip.dataset.target === id);
-      });
-      // Auto-scroll chips bar to show active
+      chips.forEach(chip => chip.classList.toggle('active', chip.dataset.target === id));
       const activeChip = document.querySelector('.chip.active');
-      if (activeChip) {
-        activeChip.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-      }
+      if (activeChip) activeChip.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
   });
 }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
 
 categories.forEach(cat => observer.observe(cat));
+
+// ===== Modal =====
+const modal = document.getElementById('modal');
+const modalImage = document.getElementById('modalImage');
+const modalName = document.getElementById('modalName');
+const modalPrice = document.getElementById('modalPrice');
+const modalClose = document.getElementById('modalClose');
+
+document.querySelectorAll('.item').forEach(item => {
+  item.addEventListener('click', () => {
+    const name = item.dataset.name;
+    const price = item.dataset.price;
+    const image = item.dataset.image || '';
+
+    if (image) {
+      modalImage.innerHTML = `<img src="${image}" alt="${name}">`;
+      modalImage.classList.remove('empty');
+    } else {
+      modalImage.innerHTML = '🍽️';
+      modalImage.classList.add('empty');
+    }
+
+    modalName.textContent = name;
+    modalPrice.textContent = price;
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+function closeModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+// ===== Search =====
+const searchInput = document.getElementById('searchInput');
+const emptyState = document.getElementById('emptyState');
+
+searchInput.addEventListener('input', (e) => {
+  const query = e.target.value.trim().toLowerCase();
+  let anyVisible = false;
+
+  categories.forEach(cat => {
+    let catHasVisible = false;
+    cat.querySelectorAll('.item').forEach(item => {
+      const name = item.dataset.name.toLowerCase();
+      const match = !query || name.includes(query);
+      item.classList.toggle('hidden', !match);
+      if (match) catHasVisible = true;
+    });
+    cat.classList.toggle('hidden', !catHasVisible);
+    if (catHasVisible) anyVisible = true;
+  });
+
+  emptyState.classList.toggle('show', !anyVisible);
+});
+
+// ===== Scroll to top =====
+const scrollTopBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
+});
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 </script>
 
 </body>
